@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Http\Requests\Sales;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreRequest extends FormRequest
+{
+    public function authorize(): bool {
+        return true;
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'sold_at' => $this->sold_at ?: now()->toDateString(),
+        ]);
+    }
+
+    public function rules(): array
+    {
+        return [
+            'seller_id' => ['required','integer','exists:sellers,id'],
+            'amount'    => ['required','numeric','min:0.01'],
+            'sold_at'   => ['required','date_format:Y-m-d','before_or_equal:today'],
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'seller_id' => 'vendedor',
+            'amount'    => 'valor',
+            'sold_at'   => 'data da venda'
+        ];
+    }
+}
