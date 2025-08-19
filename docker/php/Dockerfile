@@ -1,21 +1,37 @@
+# docker/php/Dockerfile
 FROM php:8.3-fpm-alpine
 
+ENV TZ=America/Fortaleza
+
+# 1) Pacotes necessários
+# - tzdata: arquivos de fuso horário (zoneinfo)
+# - icu-dev, libzip-dev, oniguruma-dev, $PHPIZE_DEPS: para compilar intl/mbstring/zip
+# - bash/git/unzip/curl: utilitários
 RUN apk add --no-cache \
-    bash git unzip libzip-dev icu-dev oniguruma-dev \
-    mysql-client curl libpng-dev libxml2-dev autoconf build-base
+    bash git unzip curl tzdata \
+    icu-dev libzip-dev oniguruma-dev \
+    $PHPIZE_DEPS \
+ && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
+ && echo $TZ > /etc/timezone
 
-RUN docker-php-ext-install pdo pdo_mysql intl mbstring zip opcache
-RUN docker-php-ext-install pcntl
+# 2) Extensões PHP necessárias ao Laravel
+RUN docker-php-ext-configure intl \
+ && docker-php-ext-install -j"$(nproc)" \
+      intl pdo_mysql mbstring zip bcmath opcache pcntl
 
-RUN pecl install redis \
-    && docker-php-ext-enable redis
+# 3) (Opcional) Remover deps de build e manter libs de runtime para reduzir a imagem
+RUN apk add --no-cache icu-libs libzip oniguruma \
+ && apk del --no-cache $PHPIZE_DEPS icu-dev libzip-dev oniguruma-dev
 
+# 4) Composer
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
+# 5) Ajustes PHP
 RUN { \
   echo "memory_limit=512M"; \
   echo "upload_max_filesize=32M"; \
   echo "post_max_size=32M"; \
+  echo "date.timezone=${TZ}"; \
 } > /usr/local/etc/php/conf.d/laravel.ini
 
 WORKDIR /var/www
