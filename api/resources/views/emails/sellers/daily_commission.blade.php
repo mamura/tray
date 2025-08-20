@@ -1,12 +1,21 @@
-<x-mail::message>
-# Introduction
+@php
+    use App\Support\Format;
+    $ratePct = Format::percentBR($rate);
+@endphp
 
-The body of your message.
+@component('mail::message')
+# Olá, {{ $summary->sellerName }}!
 
-<x-mail::button :url="''">
-Button Text
-</x-mail::button>
+Aqui está o seu **resumo diário** de vendas em **{{ Format::dateBR($summary->date) }}**:
 
-Thanks,<br>
-{{ config('app.name') }}
-</x-mail::message>
+@component('mail::table')
+| Métrica              | Valor                          |
+|:---------------------|:-------------------------------|
+| Vendas no dia        | {{ $summary->count }}          |
+| Total vendido        | {{ Format::moneyBR($summary->totalAmount) }} |
+| Comissão ({{ $ratePct }}) | {{ Format::moneyBR($summary->totalCommission) }} |
+@endcomponent
+
+Obrigado,
+**{{ config('app.name') }}**
+@endcomponent

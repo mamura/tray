@@ -3,7 +3,7 @@
 @baseUrl = http://{{host}}:{{port}}/api/v1
 @json = application/json
 @today = {{$datetime "YYYY-MM-DD"}}
-@sellerId = 17
+@sellerId = 9
 @saleId = 17
 
 ### ---------------------------------------------------------------------------
