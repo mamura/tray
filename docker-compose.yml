@@ -91,7 +91,7 @@ services:
     container_name: tray-queue
     working_dir: /var/www
     command: >
-      sh -lc 'php artisan queue:work
+      sh -lc 'php artisan queue:work redis
         --queue=default
         --sleep=1
         --tries=3

@@ -27,11 +27,17 @@ class SendAdminDailySalesMailJob implements ShouldQueue
 
     public function handle(DailySalesReportService $reports): void
     {
-        $admin = $reports->adminSummary($this->date);
-        $items = $this->withBreakdown ? $reports->allSellersSummaries($this->date)->all() : [];
-        $to    = (string) config('sales.admin_email', config('mail.from.address'));
+        try{
+            $admin = $reports->adminSummary($this->date);
+            $items = $this->withBreakdown ? $reports->allSellersSummaries($this->date)->all() : [];
+            $to    = (string) config('sales.admin_email', config('mail.from.address'));
 
-        Mail::to($to)->send(new AdminDailySalesMail($admin, $items));
+            Mail::to($to)->send(new AdminDailySalesMail($admin, $items));
+        } catch(Throwable $e) {
+            Log::error('job: admin failed', ['e' => $e->getMessage()]);
+            throw $e;
+        }
+
     }
 
     public function failed(Throwable $e): void

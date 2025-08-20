@@ -14,6 +14,19 @@ class SellerDailySummary
         public float $totalCommission
     ) {}
 
+    public static function fromArray(array $d): self
+    {
+        return new self(
+            sellerId:        (int)    ($d['sellerId'] ?? 0),
+            sellerName:      (string) ($d['sellerName'] ?? ''),
+            sellerEmail:     (string) ($d['sellerEmail'] ?? ''),
+            date:            (string) ($d['date'] ?? ''),
+            count:           (int)    ($d['count'] ?? 0),
+            totalAmount:     (float)  ($d['totalAmount'] ?? 0),
+            totalCommission: (float)  ($d['totalCommission'] ?? 0),
+        );
+    }
+
     public function toArray(): array
     {
         return [

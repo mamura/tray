@@ -11,6 +11,16 @@ class AdminDailySummary
         public float $totalCommission
     ) {}
 
+    public static function fromArray(array $d): self
+    {
+        return new self(
+            date:            (string) ($d['date'] ?? ''),
+            totalCount:      (int)    ($d['totalCount'] ?? 0),
+            totalAmount:     (float)  ($d['totalAmount'] ?? 0),
+            totalCommission: (float)  ($d['totalCommission'] ?? 0),
+        );
+    }
+
     public function toArray(): array
     {
         return [
