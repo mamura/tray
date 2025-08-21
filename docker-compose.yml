@@ -146,15 +146,14 @@ services:
       - ./app:/usr/src/app
       - /usr/src/app/node_modules
     ports:
-      - "5173:5173"   # Vite dev server
+      - "5173:5173"
     environment:
       TZ: America/Fortaleza
-      # se usar proxy no Vite, pode deixar /api como base
       VITE_API_URL: /api
     depends_on:
       nginx:
         condition: service_started
-    command: sh -lc "npm i && npm run dev -- --host 0.0.0.0 --port 5173"
+    #command: sh -lc "npm i && npm run dev -- --host 0.0.0.0 --port 5173"
     networks: [backend]
 
 volumes:
