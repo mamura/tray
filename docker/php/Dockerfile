@@ -4,9 +4,6 @@ FROM php:8.3-fpm-alpine
 ENV TZ=America/Fortaleza
 
 # 1) Pacotes necessários
-# - tzdata: arquivos de fuso horário (zoneinfo)
-# - icu-dev, libzip-dev, oniguruma-dev, $PHPIZE_DEPS: para compilar intl/mbstring/zip
-# - bash/git/unzip/curl: utilitários
 RUN apk add --no-cache \
     bash git unzip curl tzdata \
     icu-dev libzip-dev oniguruma-dev \
@@ -18,6 +15,11 @@ RUN apk add --no-cache \
 RUN docker-php-ext-configure intl \
  && docker-php-ext-install -j"$(nproc)" \
       intl pdo_mysql mbstring zip bcmath opcache pcntl
+
+# 2.1) PCOV (coverage leve para PHPUnit)
+RUN pecl install pcov \
+ && docker-php-ext-enable pcov \
+ && printf "pcov.enabled=0\npcov.directory=/var/www\n" > /usr/local/etc/php/conf.d/zz-pcov.ini
 
 # 3) (Opcional) Remover deps de build e manter libs de runtime para reduzir a imagem
 RUN apk add --no-cache icu-libs libzip oniguruma \

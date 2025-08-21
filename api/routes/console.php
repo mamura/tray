@@ -22,8 +22,8 @@ Schedule::call(function () {
     DispatchSellerDailyCommissionsJob::dispatch($date)->onQueue('default');
     logger()->info('scheduler: dispatched seller emails', ['date' => $date]);
 })
-    ->everyMinute()
-    //->dailyAt('23:55')
+    //->everyMinute()
+    ->dailyAt('23:55')
     ->name('daily:dispatch-seller-mails')
     ->withoutOverlapping();
 
@@ -40,7 +40,7 @@ Schedule::call(function () {
     SendAdminDailySalesMailJob::dispatch($date, true)->onQueue('default');
     logger()->info('scheduler: dispatched admin email', ['date' => $date]);
 })
-    ->everyMinute()
-    //->dailyAt('23:58')
+    //->everyMinute()
+    ->dailyAt('23:58')
     ->name('daily:admin-mail')
     ->withoutOverlapping();
