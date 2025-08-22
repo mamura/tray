@@ -19,13 +19,16 @@
     "@tailwindcss/vite": "^4.1.11",
     "apexcharts": "^5.3.2",
     "axios": "^1.11.0",
+    "date-fns": "^4.1.0",
     "pinia": "^3.0.3",
     "vue": "^3.5.17",
     "vue-router": "^4.5.1",
-    "vue3-apexcharts": "^1.8.0"
+    "vue3-apexcharts": "^1.8.0",
+    "zod": "^4.0.17"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.2",
+    "@types/date-fns": "^2.5.3",
     "@types/node": "^22.15.32",
     "@vitejs/plugin-vue": "^6.0.0",
     "@vue/eslint-config-prettier": "^10.2.0",

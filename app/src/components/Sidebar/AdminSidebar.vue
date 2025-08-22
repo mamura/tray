@@ -15,7 +15,9 @@
         class="md:block text-left md:pb-2 text-slate-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
         to="/"
       >
-        Zerodox Panel
+
+      <img src="@/assets/images/logo.png" alt="Logo" class="mx-auto w-24 mb-2" />
+        <div class="mx-auto text-center">App Sales</div>
       </router-link>
 
       <!-- User -->
@@ -41,7 +43,7 @@
                 class="md:block text-left md:pb-2 text-slate-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
                 to="/"
               >
-                Vue Notus
+                Sale App
               </router-link>
             </div>
             <div class="w-6/12 flex justify-end">
@@ -56,37 +58,33 @@
           </div>
         </div>
 
-        <!-- Form -->
-        <form class="mt-6 mb-4 md:hidden">
-          <div class="mb-3 pt-0">
-            <input
-              type="text"
-              placeholder="Search"
-              class="border border-slate-500 placeholder-slate-400 text-slate-600 bg-white px-3 py-2 h-12 rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"
-            />
-          </div>
-        </form>
-
         <!-- Divider -->
-        <hr class="my-4 md:min-w-full" />
-
-        <!-- Heading -->
-        <h6 class="md:min-w-full text-slate-500 text-xs uppercase font-bold block pt-1 pb-4">
-          Admin Layout Pages
-        </h6>
+        <hr class="mb-4 md:min-w-full" />
 
         <!-- Navigation -->
         <ul class="md:flex-col md:min-w-full flex flex-col list-none">
           <li class="items-center">
-            <router-link to="/admin/dashboard" v-slot="{ href, navigate, isActive }">
+            <router-link to="/admin/sellers" v-slot="{ href, navigate, isActive }">
               <a
                 :href="href"
                 @click="navigate"
                 class="text-xs uppercase py-3 font-bold block"
                 :class="[isActive ? 'text-emerald-500 hover:text-emerald-600' : 'text-slate-700 hover:text-slate-500']"
               >
-                <i class="fas fa-tv mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-slate-300']"></i>
-                Dashboard
+                <i class="fas fa-handshake mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-slate-300']"></i>
+                Sellers
+              </a>
+            </router-link>
+
+            <router-link to="/admin/sellers" v-slot="{ href, navigate, isActive }">
+              <a
+                :href="href"
+                @click="navigate"
+                class="text-xs uppercase py-3 font-bold block"
+                :class="[isActive ? 'text-emerald-500 hover:text-emerald-600' : 'text-slate-700 hover:text-slate-500']"
+              >
+                <i class="fas fa-basket-shopping mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-slate-300']"></i>
+                Sales
               </a>
             </router-link>
           </li>
