@@ -1,6 +1,6 @@
 <template>
   <footer class="block py-4">
-    <div class="container mx-auto px-4">
+    <div class="mx-auto px-4">
       <hr class="mb-4 border-b border-slate-200" />
       <div class="flex flex-wrap items-center md:justify-between justify-center">
         <div class="w-full md:w-4/12 px-4">
@@ -10,39 +10,11 @@
               href="https://www.creative-tim.com?ref=vn-footer-admin"
               class="text-slate-500 hover:text-slate-700 text-sm font-semibold py-1"
             >
-              Zerodox
+              Tray
             </a>
           </div>
         </div>
-        <div class="w-full md:w-8/12 px-4">
-          <ul class="flex flex-wrap list-none md:justify-end justify-center">
-            <li>
-              <a
-                href="https://zerodox.plural.plus/aluno/login"
-                class="text-slate-600 hover:text-slate-800 text-sm font-semibold block py-1 px-3"
-              >
-                EAD
-              </a>
-            </li>
 
-            <li>
-              <a
-                href="https://www.zerodox.com.br/blog"
-                class="text-slate-600 hover:text-slate-800 text-sm font-semibold block py-1 px-3"
-              >
-                Blog
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.zerodox.com.br/seja-um-parceiro"
-                class="text-slate-600 hover:text-slate-800 text-sm font-semibold block py-1 px-3"
-              >
-                Seja parceiro
-              </a>
-            </li>
-          </ul>
-        </div>
       </div>
     </div>
   </footer>

@@ -5,9 +5,10 @@ import { createPinia } from 'pinia'
 import App from './App.vue';
 import { router } from './router';
 
-const app = createApp(App)
+const app = createApp(App);
+const pinia = createPinia();
 
-app.use(createPinia())
+app.use(pinia)
 app.use(router)
 
 app.config.errorHandler = (err, instance, info) => {
@@ -16,3 +17,12 @@ app.config.errorHandler = (err, instance, info) => {
 }
 
 app.mount('#app')
+
+if (import.meta.env.DEV) {
+  // carregado dinâmico para evitar ciclos
+  import('@/stores/notify').then(({ useNotifyStore }) => {
+    // @ts-expect-error: expõe no window só para debug
+    window.notify = useNotifyStore(pinia)
+    // no console: notify.success('funcionou!')
+  })
+}
