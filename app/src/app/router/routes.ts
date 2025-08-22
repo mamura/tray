@@ -1,10 +1,11 @@
-import DashboardLayout from "@/layouts/DashboardLayout.vue";
+import DashboardLayout from "@app/layouts/DashboardLayout.vue";
 import DashboardPage from "@/pages/DashboardPage.vue";
 import AdminLayout from "@app/layouts/AdminLayout.vue";
 import type { RouteRecordRaw } from "vue-router";
 
 const UsersList   = () => import('@/pages/users/List.vue')
 const SellersList = () => import('@/pages/sellers/ListView.vue')
+const SalesList   = () => import('@/pages/sales/ListView.vue')
 
 export const routes: RouteRecordRaw[] = [
   {
@@ -14,35 +15,21 @@ export const routes: RouteRecordRaw[] = [
   },
 
   {
-    path: "/",
+    path: '/',
     component: DashboardLayout,
-    meta: {
-      requiresAuth: true,
-    },
+    meta: { requiresAuth: true },
     children: [
-      {
-        path: '',
-      name: 'home',
-      component: DashboardPage
-      }
+      { path: '', name: 'home', component: DashboardPage },
     ],
   },
-
   {
     path: '/',
     component: AdminLayout,
-    meta: {
-      requiresAuth: true
-    },
+    meta: { requiresAuth: true },
     children: [
-      {
-        path: '',
-        name: 'home',
-        component: DashboardPage
-      },
       { path: 'sellers', component: SellersList },
       { path: 'users', component: UsersList },
-      //{ path: 'sales', component: SalesPage },
+      { path: 'sales', component: SalesList },
       //{ path: 'reports/admin', component: ReportsAdminPage },
       //{ path: 'reports/sellers', component: ReportsSellersPage },
     ]

@@ -64,24 +64,24 @@
         <!-- Navigation -->
         <ul class="md:flex-col md:min-w-full flex flex-col list-none">
           <li class="items-center">
-            <router-link to="/admin/sellers" v-slot="{ href, navigate, isActive }">
+            <router-link to="/sellers" v-slot="{ href, navigate, isActive }">
               <a
                 :href="href"
                 @click="navigate"
                 class="text-xs uppercase py-3 font-bold block"
-                :class="[isActive ? 'text-emerald-500 hover:text-emerald-600' : 'text-slate-700 hover:text-slate-500']"
+                :class="[isActive ? 'text-cyan-700 hover:text-cyan-800' : 'text-slate-700 hover:text-slate-500']"
               >
                 <i class="fas fa-handshake mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-slate-300']"></i>
                 Sellers
               </a>
             </router-link>
 
-            <router-link to="/admin/sellers" v-slot="{ href, navigate, isActive }">
+            <router-link to="/sales" v-slot="{ href, navigate, isActive }">
               <a
                 :href="href"
                 @click="navigate"
                 class="text-xs uppercase py-3 font-bold block"
-                :class="[isActive ? 'text-emerald-500 hover:text-emerald-600' : 'text-slate-700 hover:text-slate-500']"
+                :class="[isActive ? 'text-cyan-700 hover:text-cyan-800' : 'text-slate-700 hover:text-slate-500']"
               >
                 <i class="fas fa-basket-shopping mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-slate-300']"></i>
                 Sales

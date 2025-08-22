@@ -1,4 +1,4 @@
-import type { SellerId } from "./seller";
+import type { Seller, SellerId } from "./seller";
 
 export type SaleId = number;
 
@@ -10,4 +10,8 @@ export interface Sale {
   commission?: number;
   created_at?: string;
   updated_at?: string;
+  seller?: Seller;
 }
+
+
+export ytpe Sale
